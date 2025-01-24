@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday - Realistic Candles</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle, #1a1a2e, #0f0f1c);
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto; /* Enable vertical scrolling */
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #ffcc00;
+      text-shadow: 0 0 15px #ffcc00, 0 0 30px #ff9933;
+    }
+
+    .candles-container {
+      display: none;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 2rem auto;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .candle {
+      position: relative;
+      width: 30px;
+      height: 90px;
+      background: linear-gradient(to bottom, #ffd700, #ffcc00);
+      border-radius: 10px;
+      box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.4);
+      animation: candleEntrance 1s ease forwards;
+    }
+
+    @keyframes candleEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .candle::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 15px;
+      height: 25px;
+      background: radial-gradient(circle, #ff4500, #ffd700 50%, transparent);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(255, 69, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.5);
+      animation: flicker 1.5s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateX(-50%) scale(1.1);
+        opacity: 0.8;
+      }
+    }
+
+    .glitter {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      width: 60px;
+      height: 60px;
+      transform: translateX(-50%);
+      pointer-events: none;
+      overflow: hidden;
+      animation: glitterEffect 2s linear infinite;
+    }
+
+    @keyframes glitterEffect {
+      0% {
+        opacity: 0.5;
+        transform: translateX(-50%) rotate(0deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) rotate(360deg);
+      }
+    }
+
+    .glitter span {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: sparkle 1s infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 1;
+      }
+    }
+
+    .button {
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      color: white;
+      font-size: 1rem;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      margin: 1rem 0;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 20px rgba(255, 69, 0, 0.6);
+    }
+
+    .message {
+      font-size: 1rem;
+      margin-top: 1.5rem;
+      padding: 0 1rem;
+      line-height: 1.5;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      color: #ffcc00;
+      text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff9933;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .candles-container {
+        gap: 5px;
+      }
+
+      .candle {
+        width: 25px;
+        height: 75px;
+      }
+
+      .candle::before {
+        top: -20px;
+        width: 10px;
+        height: 15px;
+      }
+
+      .glitter {
+        width: 40px;
+        height: 40px;
+      }
+
+      .message {
+        font-size: 0.9rem;
+      }
+
+      .button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy Birthday, My Love! 🎂</h1>
+  <button class="button" onclick="generateCandles()">Let the Celebration Glow!</button>
+  <div class="candles-container" id="candlesContainer"></div>
+  <div class="message" id="message" style="display: none;">
+    My dearest love, as these candles light up the darkness, may your life always shine with boundless success, joy, and love.  
+    Just as the wax melts away, may all your worries and troubles disappear.  
+    And just like the warm, glowing flames, may every wish in your heart come true, filling your life with endless happiness and dreams fulfilled.  
+    You are the light of my life, and I am so blessed to celebrate you today and always. ❤️
+  </div>
+
+  <!-- Background Music -->
+  <audio id="background-music" loop>
+    <source src="../img/a-birthday-to-remember-201324.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    function generateCandles() {
+      const container = document.getElementById('candlesContainer');
+      const message = document.getElementById('message');
+      const music = document.getElementById('background-music');
+
+      container.innerHTML = ''; // Clear previous candles
+      const age = 23;
+
+      for (let i = 0; i < age; i++) {
+        const candle = document.createElement('div');
+        candle.classList.add('candle');
+
+        const glitter = document.createElement('div');
+        glitter.classList.add('glitter');
+        for (let j = 0; j < 20; j++) {
+          const sparkle = document.createElement('span');
+          sparkle.style.top = `${Math.random() * 60}px`;
+          sparkle.style.left = `${Math.random() * 60}px`;
+          sparkle.style.animationDelay = `${Math.random()}s`;
+          glitter.appendChild(sparkle);
+        }
+
+        candle.appendChild(glitter);
+        container.appendChild(candle);
+      }
+
+      // Show candles and message
+      container.style.display = 'flex';
+      message.style.display = 'block';
+
+      // Start playing the background music
+      music.play();
+    }
+  </script>
+</body>
+</html>
